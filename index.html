@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="uk">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="AI STUDIO SYMBIOS — кінематографічні AI-ролики та гайди з готовими промптами.">
+<meta name="description" content="AI STUDIO SYMBIOS — cinematic AI films and guides with ready-to-use prompts.">
 <meta property="og:title" content="AI STUDIO SYMBIOS">
-<meta property="og:description" content="Кінематографічні AI-ролики">
+<meta property="og:description" content="Cinematic AI films">
 <meta property="og:image" content="img/hero.jpg">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
-<title>SYMBIOS Гайди</title>
+<title>SYMBIOS Guides</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -128,21 +128,21 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 
 
 <header class="bar"><div class="wrap">
-  <a class="mark" href="#top" aria-label="SYMBIOS — на головну">SYMBIOS</a>
+  <a class="mark" href="#top" aria-label="SYMBIOS — home">SYMBIOS</a>
   <a class="ig" href="https://instagram.com/aisymbios" target="_blank" rel="noopener">@aisymbios ↗</a>
 </div></header>
 
 <main id="app"></main>
 
-<footer><div class="wrap"><span class="lbl">SYMBIOS · cinematic AI</span><span class="lbl">Україна · 2026</span></div></footer>
+<footer><div class="wrap"><span class="lbl">SYMBIOS · cinematic AI</span><span class="lbl">Ukraine · 2026</span></div></footer>
 
 <script>
-/* ГАЙДИ — щоб додати новий, скопіюй об'єкт і зміни поля. img: файл обкладинки, pos: фокус кадру */
+/* GUIDES — to add one, copy an object and edit the fields. img: cover file, pos: focal point. Refs are always @image1, @image2… */
 const GUIDES=[
-{slug:"superhero",video:"vid/superhero.mp4",img:"img/superhero-poster.jpg",pos:"50% 45%",tag:"Higgsfield Genjutsu",time:"3 хв",title:"Стань супергероєм",
+{slug:"superhero",video:"vid/superhero.mp4",img:"img/superhero-poster.jpg",pos:"50% 45%",tag:"Higgsfield Genjutsu",time:"3 min",title:"Become a superhero",
  rows:[
-  {h:"Створи карту персонажа",p:"Своє фото завантаж як @Img1, емблему як @image2 і встав промпт.",
-   prompt:`Three-panel character reference sheet of the person from @Img1  keeping their exact facial identity, eyes, brows and skin texture. Same person in all three panels, separated by thin white vertical lines. 
+  {h:"Create a character sheet",p:"Upload your photo as @image1, the emblem as @image2, and paste the prompt.",
+   prompt:`Three-panel character reference sheet of the person from @image1, keeping their exact facial identity, eyes, brows and skin texture. Same person in all three panels, separated by thin white vertical lines. 
 
 Left panel: full-body front view framed from the collar of the suit down to the boots. The top edge of this panel cuts exactly at the base of the neck, through the high collar. Nothing above the collar is visible in this panel — no chin, no jaw, no beard, no mouth, no face, no hair. Strong grounded stance, arms relaxed, the whole suit from collar to boots fully in frame. 
 Center panel: front head-and-shoulders portrait, serious stare straight into the camera. 
@@ -154,9 +154,9 @@ Emblem: on the center of the chest, the emblem from @image2 reproduced exactly �
 Mask: a sculpted matte black lower-face half mask covering the nose, mouth and jaw, with thin red vent slits on the sides; eyes, brows and forehead fully visible. 
 
 Plain dark-grey seamless studio background, soft key light with subtle rim light, photorealistic, natural skin texture, 85mm lens look. The left panel shows only the suit from the collar down, no part of the head is visible in it. No captions, no labels, no watermark.`,
-   img:"img/sheet.jpg",alt:"Карта персонажа: костюм, портрет анфас і профіль"},
-  {h:"Відкрий Higgsfield Genjutsu",p:"Create Video → Higgsfield Genjutsu → Motion transfer.",link:{href:"https://higgsfield.ai?fpr=vladyslav-88084e",label:"Відкрити Higgsfield ↗"}},
-  {h:"Додай відео і карту",p:"Зверху — твоє відео з рухом. Знизу — карта персонажа. Натисни Generate.",img:"img/genjutsu.png",narrow:true,alt:"Екран Genjutsu: відеореференс, карта персонажа і кнопка Generate"}
+   img:"img/sheet.jpg",alt:"Character sheet: suit, front portrait and side profile"},
+  {h:"Open Higgsfield Genjutsu",p:"Create Video → Higgsfield Genjutsu → Motion transfer.",link:{href:"https://higgsfield.ai?fpr=vladyslav-88084e",label:"Open Higgsfield ↗"}},
+  {h:"Add the video and the sheet",p:"Top: your motion video. Bottom: the character sheet. Hit Generate.",img:"img/genjutsu.png",narrow:true,alt:"Genjutsu screen: video reference, character sheet and Generate button"}
  ]}
 ];
 
@@ -166,29 +166,29 @@ const tile=(g,i)=>`<a class="tile" href="#${g.slug}"><div class="img">${g.video?
 
 function home(){
   app.innerHTML=`
-  <section class="hero" id="top"><div class="frame"><img src="img/hero.jpg" alt="Людина на червоному стільці дивиться, як метеорит падає на Землю"></div>
+  <section class="hero" id="top"><div class="frame"><img src="img/hero.jpg" alt="A man on a red chair watches a meteor fall toward Earth"></div>
     <div class="over"><div class="wrap"><h1>AI STUDIO <span>SYMBIOS</span></h1><a class="btn" href="https://instagram.com/aisymbios" target="_blank" rel="noopener">Instagram ↗</a></div></div></section>
   <div class="wrap">
-    <div class="shead"><h2>Гайди</h2><span class="lbl">${GUIDES.length?GUIDES.length+' · розбори':'Перший уже скоро'}</span></div>
+    <div class="shead"><h2>Guides</h2><span class="lbl">${GUIDES.length?GUIDES.length+(GUIDES.length>1?' guides':' guide'):'First one coming soon'}</span></div>
     ${GUIDES.length?`<div class="grid">${GUIDES.map(tile).join('')}</div>`:''}
   </div>
   <section class="band"><div class="wrap">
-    <img src="img/portrait.jpg" alt="Автор SYMBIOS" loading="lazy">
-    <div class="txt"><p>Кінематографічні AI-ролики</p><a class="btn" href="https://instagram.com/aisymbios" target="_blank" rel="noopener">Instagram ↗</a></div>
+    <img src="img/portrait.jpg" alt="SYMBIOS founder" loading="lazy">
+    <div class="txt"><p>Cinematic AI films</p><a class="btn" href="https://instagram.com/aisymbios" target="_blank" rel="noopener">Instagram ↗</a></div>
   </div></section>`;
 }
 function guide(g){
   app.innerHTML=`
-  ${g.video?`<div class="wrap vhead"><div class="ghead"><a href="#top">← Гайди</a><span class="lbl">${esc(g.tag)} · ${esc(g.time)}</span><h1>${esc(g.title)}</h1><p class="steps-n">${g.rows.length} кроки · результат праворуч</p></div><video class="vplay" src="${g.video}" poster="${g.img}" controls playsinline preload="metadata"></video></div>`:`<section class="gcover"><div class="frame"><img src="${g.img}" alt="" style="object-position:${g.pos}"></div></section>`}
+  ${g.video?`<div class="wrap vhead"><div class="ghead"><a href="#top">← Guides</a><span class="lbl">${esc(g.tag)} · ${esc(g.time)}</span><h1>${esc(g.title)}</h1><p class="steps-n">${g.rows.length} steps · result on the right</p></div><video class="vplay" src="${g.video}" poster="${g.img}" controls playsinline preload="metadata"></video></div>`:`<section class="gcover"><div class="frame"><img src="${g.img}" alt="" style="object-position:${g.pos}"></div></section>`}
   <div class="wrap">
-    ${g.video?'':`<div class="ghead"><a href="#top">← Гайди</a><h1>${esc(g.title)}</h1></div>`}
-    <ol class="rows">${g.rows.map((r,i)=>`<li class="row"><div><h3>${esc(r.h)}</h3>${r.p?`<p>${esc(r.p)}</p>`:''}${r.link?`<a class="btn rowbtn" href="${r.link.href}" target="_blank" rel="noopener">${esc(r.link.label)}</a>`:''}${r.img?`<img class="shot${r.narrow?' narrow':''}" src="${r.img}" alt="${esc(r.alt||'')}" loading="lazy">`:''}${r.prompt?`<div class="prompt"><button class="copy" id="cp${i}" data-i="${i}">Копіювати</button><pre>${esc(r.prompt).replace(/@im(?:g|age)\d/gi,m=>`<span class="t">${m}</span>`)}</pre></div>`:''}</div></li>`).join('')}</ol>
-    ${GUIDES.length>1?`<div class="shead"><h2>Ще гайди</h2></div>
+    ${g.video?'':`<div class="ghead"><a href="#top">← Guides</a><h1>${esc(g.title)}</h1></div>`}
+    <ol class="rows">${g.rows.map((r,i)=>`<li class="row"><div><h3>${esc(r.h)}</h3>${r.p?`<p>${esc(r.p)}</p>`:''}${r.link?`<a class="btn rowbtn" href="${r.link.href}" target="_blank" rel="noopener">${esc(r.link.label)}</a>`:''}${r.img?`<img class="shot${r.narrow?' narrow':''}" src="${r.img}" alt="${esc(r.alt||'')}" loading="lazy">`:''}${r.prompt?`<div class="prompt"><button class="copy" id="cp${i}" data-i="${i}">Copy</button><pre>${esc(r.prompt).replace(/@im(?:g|age)\d/gi,m=>`<span class="t">${m}</span>`)}</pre></div>`:''}</div></li>`).join('')}</ol>
+    ${GUIDES.length>1?`<div class="shead"><h2>More guides</h2></div>
     <div class="grid">${GUIDES.filter(o=>o!==g).slice(0,2).map(o=>tile(o,GUIDES.indexOf(o))).join('')}</div>`:''}
   </div>`;
   app.querySelectorAll('.copy').forEach(b=>b.onclick=()=>{
     const t=g.rows[b.dataset.i].prompt,pre=b.nextElementSibling;
-    const ok=()=>{b.textContent='Готово';b.classList.add('ok');setTimeout(()=>{b.textContent='Копіювати';b.classList.remove('ok')},1500)};
+    const ok=()=>{b.textContent='Copied';b.classList.add('ok');setTimeout(()=>{b.textContent='Copy';b.classList.remove('ok')},1500)};
     const sel=()=>{const r=document.createRange();r.selectNodeContents(pre);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Ctrl+C'};
     try{navigator.clipboard.writeText(t).then(ok,sel)}catch(e){sel()}
   });
