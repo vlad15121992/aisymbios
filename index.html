@@ -67,9 +67,9 @@ img{display:block;max-width:100%}
 @media (max-width:720px){.grid{grid-template-columns:1fr}}
 .tile{display:block;min-width:0}
 .tile .img{position:relative;aspect-ratio:16/10;max-width:100%;overflow:hidden;background:var(--bg-2)}
-.tile img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1),filter .6s}
-.tile:not(:hover) img{filter:saturate(.85) brightness(.92)}
-.tile:hover img{transform:scale(1.045)}
+.tile img,.tile video{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1),filter .6s}
+.tile:not(:hover) img,.tile:not(:hover) video{filter:saturate(.85) brightness(.92)}
+.tile:hover img,.tile:hover video{transform:scale(1.045)}
 .tile .info{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:12px;align-items:baseline;padding-block:16px 8px;border-bottom:1px solid var(--line)}
 .tile .n{font:500 12px/1 var(--mono);color:var(--yellow)}
 .tile h3{font:400 clamp(20px,2.2vw,26px)/1.1 var(--display);margin:0;text-wrap:balance}
@@ -111,6 +111,16 @@ a.btn:hover{background:var(--fg)}
 .copy{position:absolute;top:12px;right:12px;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;background:var(--fg);color:var(--bg);border:0;padding:10px 12px;cursor:pointer}
 .copy:hover,.copy.ok{background:var(--yellow)}
 
+.vhead{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(24px,5vw,64px);align-items:end;padding-block:32px 8px}
+.vhead .ghead{padding-block:0}
+.vhead .lbl{display:block;margin-top:28px}
+.vhead h1{margin-top:12px}
+.steps-n{font:500 12px/1 var(--mono);color:var(--muted);margin:20px 0 0}
+.vplay{display:block;height:min(72vh,640px);aspect-ratio:9/16;max-width:100%;background:#000;object-fit:cover}
+@media (max-width:720px){.vhead{grid-template-columns:1fr}.vplay{height:auto;width:100%}.steps-n{display:none}}
+.rowbtn{margin-top:18px}
+.shot{display:block;width:100%;margin-top:20px;background:var(--bg-2)}
+.shot.narrow{width:min(100%,320px)}
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:28px}
 </style>
 </head>
@@ -129,11 +139,30 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 <script>
 /* ГАЙДИ — щоб додати новий, скопіюй об'єкт і зміни поля. img: файл обкладинки, pos: фокус кадру */
 const GUIDES=[
+{slug:"superhero",video:"vid/superhero.mp4",img:"img/superhero-poster.jpg",pos:"50% 45%",tag:"Higgsfield Genjutsu",time:"3 хв",title:"Стань супергероєм",
+ rows:[
+  {h:"Створи карту персонажа",p:"Своє фото завантаж як @Img1, емблему як @image2 і встав промпт.",
+   prompt:`Three-panel character reference sheet of the person from @Img1  keeping their exact facial identity, eyes, brows and skin texture. Same person in all three panels, separated by thin white vertical lines. 
+
+Left panel: full-body front view framed from the collar of the suit down to the boots. The top edge of this panel cuts exactly at the base of the neck, through the high collar. Nothing above the collar is visible in this panel — no chin, no jaw, no beard, no mouth, no face, no hair. Strong grounded stance, arms relaxed, the whole suit from collar to boots fully in frame. 
+Center panel: front head-and-shoulders portrait, serious stare straight into the camera. 
+Right panel: side profile head-and-shoulders portrait facing right. 
+
+Superhero suit: a sleek high-end film-quality bodysuit in matte graphite-black technical fabric with a fine hexagonal texture, segmented armor plates in dark gunmetal on the chest, shoulders and forearms, thin signal-red seam lines, a high structured collar, integrated gloves, armored boots. 
+Emblem: on the center of the chest, the emblem from @image2 reproduced exactly — an angular chamfered warm-white letter S with a thin red diagonal line cutting through the S itself, splitting it into two halves, exactly as in @image2. Inlaid flush into the armor as a slightly raised matte enamel insert. A smaller copy of the same emblem on the left shoulder plate. No other logos or text. 
+
+Mask: a sculpted matte black lower-face half mask covering the nose, mouth and jaw, with thin red vent slits on the sides; eyes, brows and forehead fully visible. 
+
+Plain dark-grey seamless studio background, soft key light with subtle rim light, photorealistic, natural skin texture, 85mm lens look. The left panel shows only the suit from the collar down, no part of the head is visible in it. No captions, no labels, no watermark.`,
+   img:"img/sheet.jpg",alt:"Карта персонажа: костюм, портрет анфас і профіль"},
+  {h:"Відкрий Higgsfield Genjutsu",p:"Create Video → Higgsfield Genjutsu → Motion transfer.",link:{href:"https://higgsfield.ai?fpr=vladyslav-88084e",label:"Відкрити Higgsfield ↗"}},
+  {h:"Додай відео і карту",p:"Зверху — твоє відео з рухом. Знизу — карта персонажа. Натисни Generate.",img:"img/genjutsu.png",narrow:true,alt:"Екран Genjutsu: відеореференс, карта персонажа і кнопка Generate"}
+ ]}
 ];
 
 const app=document.getElementById('app');
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const tile=(g,i)=>`<a class="tile" href="#${g.slug}"><div class="img"><img src="${g.img}" alt="" loading="lazy" style="object-position:${g.pos}"></div><div class="info"><span class="n">${String(i+1).padStart(2,'0')}</span><h3>${esc(g.title)}</h3><span class="meta">${esc(g.tag)} · ${esc(g.time)}</span></div></a>`;
+const tile=(g,i)=>`<a class="tile" href="#${g.slug}"><div class="img">${g.video?`<video src="${g.video}" poster="${g.img}" muted loop playsinline autoplay preload="metadata" style="object-position:${g.pos}"></video>`:`<img src="${g.img}" alt="" loading="lazy" style="object-position:${g.pos}">`}</div><div class="info"><span class="n">${String(i+1).padStart(2,'0')}</span><h3>${esc(g.title)}</h3><span class="meta">${esc(g.tag)} · ${esc(g.time)}</span></div></a>`;
 
 function home(){
   app.innerHTML=`
@@ -150,10 +179,10 @@ function home(){
 }
 function guide(g){
   app.innerHTML=`
-  <section class="gcover"><div class="frame"><img src="${g.img}" alt="" style="object-position:${g.pos}"></div></section>
+  ${g.video?`<div class="wrap vhead"><div class="ghead"><a href="#top">← Гайди</a><span class="lbl">${esc(g.tag)} · ${esc(g.time)}</span><h1>${esc(g.title)}</h1><p class="steps-n">${g.rows.length} кроки · результат праворуч</p></div><video class="vplay" src="${g.video}" poster="${g.img}" controls playsinline preload="metadata"></video></div>`:`<section class="gcover"><div class="frame"><img src="${g.img}" alt="" style="object-position:${g.pos}"></div></section>`}
   <div class="wrap">
-    <div class="ghead"><a href="#top">← Гайди</a><h1>${esc(g.title)}</h1></div>
-    <ol class="rows">${g.rows.map((r,i)=>`<li class="row"><div><h3>${esc(r.h)}</h3>${r.p?`<p>${esc(r.p)}</p>`:''}${r.prompt?`<div class="prompt"><button class="copy" id="cp${i}" data-i="${i}">Копіювати</button><pre>${esc(r.prompt).replace(/@img\d/g,m=>`<span class="t">${m}</span>`)}</pre></div>`:''}</div></li>`).join('')}</ol>
+    ${g.video?'':`<div class="ghead"><a href="#top">← Гайди</a><h1>${esc(g.title)}</h1></div>`}
+    <ol class="rows">${g.rows.map((r,i)=>`<li class="row"><div><h3>${esc(r.h)}</h3>${r.p?`<p>${esc(r.p)}</p>`:''}${r.link?`<a class="btn rowbtn" href="${r.link.href}" target="_blank" rel="noopener">${esc(r.link.label)}</a>`:''}${r.img?`<img class="shot${r.narrow?' narrow':''}" src="${r.img}" alt="${esc(r.alt||'')}" loading="lazy">`:''}${r.prompt?`<div class="prompt"><button class="copy" id="cp${i}" data-i="${i}">Копіювати</button><pre>${esc(r.prompt).replace(/@im(?:g|age)\d/gi,m=>`<span class="t">${m}</span>`)}</pre></div>`:''}</div></li>`).join('')}</ol>
     ${GUIDES.length>1?`<div class="shead"><h2>Ще гайди</h2></div>
     <div class="grid">${GUIDES.filter(o=>o!==g).slice(0,2).map(o=>tile(o,GUIDES.indexOf(o))).join('')}</div>`:''}
   </div>`;
