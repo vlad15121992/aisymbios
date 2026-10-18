@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="AI STUDIO SYMBIOS — кінематографічні AI-ролики та гайди з готовими промптами.">
+<meta property="og:title" content="AI STUDIO SYMBIOS">
+<meta property="og:description" content="Кінематографічні AI-ролики">
+<meta property="og:image" content="img/hero.jpg">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
+<title>SYMBIOS Гайди</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: cinema — letterboxed 2.39:1 hero still, film-frame cover tiles, rust author band; guide = letterboxed cover + numbered rows with copyable prompts */
+:root{
+  --bg:#0D0C10;      /* space black */
+  --bg-2:#17151A;
+  --line:#2A262B;
+  --fg:#EFE9DF;
+  --muted:#8C847A;
+  --rust:#993712;    /* backdrop orange */
+  --yellow:#E0AE2E;  /* wordmark */
+  --display:"Archivo Black","Arial Black",Impact,sans-serif;
+  --body:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:400 16px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.lbl{font:500 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+/* header */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;padding-block:16px}
+.mark{font:400 20px/1 var(--display);color:var(--yellow);letter-spacing:.02em}
+.ig{font:500 12px/1 var(--mono);color:var(--muted)}
+.ig:hover{color:var(--yellow)}
+
+/* hero: letterboxed still */
+.hero{position:relative;background:#000}
+.hero .frame{position:relative;aspect-ratio:2.39/1;max-width:100%;overflow:hidden}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;animation:drift 18s ease-out both}
+@keyframes drift{from{transform:scale(1.06)}to{transform:scale(1)}}
+.hero .frame::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(13,12,16,.85),rgba(13,12,16,0) 55%)}
+.hero .over{position:absolute;inset:auto 0 0 0;z-index:1}
+.hero .over .wrap{padding-block:0 clamp(18px,3.4vw,44px);display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
+.hero h1{font:400 clamp(34px,6.6vw,96px)/.92 var(--display);margin:0;letter-spacing:-.02em;max-width:12ch}
+.hero h1 span{color:var(--yellow)}
+.hero .tc{font:500 12px/1.6 var(--mono);color:var(--fg);opacity:.75;text-align:right;white-space:nowrap}
+@media (max-width:640px){.hero .frame{aspect-ratio:4/5}.hero img{object-position:62% 50%}.hero .over .wrap{flex-direction:column;align-items:flex-start}}
+
+/* section head */
+.shead{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-block:72px 24px}
+.shead h2{font:400 clamp(28px,3.6vw,44px)/1 var(--display);margin:0}
+
+/* tiles */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 20px;padding-bottom:24px}
+@media (max-width:720px){.grid{grid-template-columns:1fr}}
+.tile{display:block;min-width:0}
+.tile .img{position:relative;aspect-ratio:16/10;max-width:100%;overflow:hidden;background:var(--bg-2)}
+.tile img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1),filter .6s}
+.tile:not(:hover) img{filter:saturate(.85) brightness(.92)}
+.tile:hover img{transform:scale(1.045)}
+.tile .info{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:12px;align-items:baseline;padding-block:16px 8px;border-bottom:1px solid var(--line)}
+.tile .n{font:500 12px/1 var(--mono);color:var(--yellow)}
+.tile h3{font:400 clamp(20px,2.2vw,26px)/1.1 var(--display);margin:0;text-wrap:balance}
+.tile .meta{font:500 11px/1 var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.12em;white-space:nowrap}
+.tile:hover h3{color:var(--yellow)}
+
+/* author band */
+.band{background:var(--rust);margin-top:96px}
+.band .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,5vw,72px);align-items:center;padding-block:0}
+.band img{aspect-ratio:1/1;width:100%;object-fit:cover}
+.band .txt{padding-block:40px}
+.band .lbl{color:rgba(239,233,223,.7)}
+.band p{font:400 clamp(26px,3.4vw,44px)/1.08 var(--display);margin:16px 0 28px;max-width:16ch;text-wrap:balance}
+a.btn{flex:none;display:inline-flex;gap:10px;align-items:center;background:var(--yellow);color:#1A1208;font:500 13px/1 var(--mono);padding:14px 18px;white-space:nowrap}
+a.btn:hover{background:var(--fg)}
+@media (max-width:720px){.band .wrap{grid-template-columns:1fr;padding-top:24px}.band .txt{padding-block:0 32px}}
+
+/* guide */
+.gcover{background:#000}
+.gcover .frame{position:relative;aspect-ratio:2.39/1;max-width:100%;overflow:hidden}
+.gcover img{width:100%;height:100%;object-fit:cover}
+.gcover .frame::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(13,12,16,.9),rgba(13,12,16,.1) 60%)}
+@media (max-width:640px){.gcover .frame{aspect-ratio:4/3}}
+.ghead{padding-block:28px 8px}
+.ghead a{font:500 12px/1 var(--mono);color:var(--muted)}
+.ghead a:hover{color:var(--fg)}
+.ghead h1{font:400 clamp(36px,6vw,80px)/.95 var(--display);margin:18px 0 0;max-width:14ch;letter-spacing:-.02em}
+.rows{list-style:none;margin:0;padding:32px 0 40px;counter-reset:r}
+.row{counter-increment:r;display:grid;grid-template-columns:120px minmax(0,1fr);gap:24px;padding-block:36px;border-top:1px solid var(--line)}
+.row::before{content:counter(r,decimal-leading-zero);font:400 40px/1 var(--display);color:var(--yellow)}
+@media (max-width:640px){.row{grid-template-columns:1fr;gap:10px}.row::before{font-size:28px}}
+.row > div{min-width:0}
+.row h3{font:400 clamp(22px,2.6vw,30px)/1.1 var(--display);margin:0;max-width:26ch;text-wrap:balance}
+.row p{margin:10px 0 0;color:var(--muted);max-width:54ch}
+.prompt{position:relative;margin-top:20px;background:var(--bg-2);border-left:2px solid var(--rust)}
+.prompt pre{margin:0;padding:20px 124px 20px 20px;font:400 13.5px/1.7 var(--mono);white-space:pre-wrap;word-break:break-word}
+@media (max-width:640px){.prompt pre{padding:56px 16px 18px}}
+.prompt .t{color:var(--yellow)}
+.copy{position:absolute;top:12px;right:12px;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;background:var(--fg);color:var(--bg);border:0;padding:10px 12px;cursor:pointer}
+.copy:hover,.copy.ok{background:var(--yellow)}
+
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:28px}
+</style>
+</head>
+<body>
+
+
+<header class="bar"><div class="wrap">
+  <a class="mark" href="#top" aria-label="SYMBIOS — на головну">SYMBIOS</a>
+  <a class="ig" href="https://instagram.com/aisymbios" target="_blank" rel="noopener">@aisymbios ↗</a>
+</div></header>
+
+<main id="app"></main>
+
+<footer><div class="wrap"><span class="lbl">SYMBIOS · cinematic AI</span><span class="lbl">Україна · 2026</span></div></footer>
+
+<script>
+/* ГАЙДИ — щоб додати новий, скопіюй об'єкт і зміни поля. img: файл обкладинки, pos: фокус кадру */
+const GUIDES=[
+{slug:"kadr",img:"img/meteor.jpg",pos:"50% 40%",tag:"Кадр",time:"3 хв",title:"Кадр, як із фільму",
+ rows:[
+  {h:"Людина + подія",p:"Масштаб читається, коли поруч із подією є людина. Метеорит — це шпалери, метеорит і глядач на стільці — це вже кіно."},
+  {h:"Оптика, а не прикметники",prompt:"Shot on ARRI Alexa, 40mm anamorphic lens, low angle, warm rim light from the fireball, deep blue shadows, subject in the right third of the frame."},
+  {h:"Один теплий, один холодний",p:"Помаранчеве джерело світла проти синьої тіні. Більше кольорів — і кадр стає дешевим."}
+ ]},
+{slug:"geroy",img:"img/portrait.jpg",pos:"50% 35%",tag:"Персонаж",time:"4 хв",title:"Один герой у всіх кадрах",
+ rows:[
+  {h:"Лист персонажа з трьох панелей",p:"Сірий студійний фон. Тіло від шиї вниз без обличчя, портрет анфас, профіль."},
+  {h:"Промпт для листа",prompt:"Character sheet, three vertical panels on plain grey studio background: full body from the neck down with no face visible, front head-and-shoulders portrait, side profile. Same person, same outfit, even soft light."},
+  {h:"Посилання як @img1",p:"Лист персонажа — @img1, локація — @img2. У промпті відео тільки теги, без повторного опису обличчя."}
+ ]},
+{slug:"scena",img:"img/chair.jpg",pos:"40% 50%",tag:"Seedance 2.0",time:"4 хв",title:"Сцена одним промптом",
+ rows:[
+  {h:"Без SHOT 1 / SHOT 2",p:"Розбивка на шоти ламає обличчя героя між кадрами. Пиши сцену одним безперервним описом."},
+  {h:"Готовий промпт",prompt:"@img1 sits on a red metal chair on a concrete ledge, back to camera, holding a soda can. Beyond the ledge the Earth curves below, a burning meteor streaks across the sky. Slow dolly in from behind, his head turns slightly to follow the fireball, warm light flickers on his face."},
+  {h:"Український контекст",p:"Якщо дія в Україні, почни промпт із блоку з українськими вивісками, номерами й прапором. Інакше модель підмішує чуже."}
+ ]},
+{slug:"tekst",img:"img/hero.jpg",pos:"30% 75%",tag:"Пост",time:"2 хв",title:"Текст поверх кадру",
+ rows:[
+  {h:"Не проси модель писати",p:"Кирилицю й латиницю нейромережа малює з помилками."},
+  {h:"Накладай у CapCut",p:"Шрифт JetBrains Mono або IBM Plex Mono, дрібно, у нижній третині кадру. Як титр, а не як реклама."}
+ ]}
+];
+
+const app=document.getElementById('app');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const tile=(g,i)=>`<a class="tile" href="#${g.slug}"><div class="img"><img src="${g.img}" alt="" loading="lazy" style="object-position:${g.pos}"></div><div class="info"><span class="n">${String(i+1).padStart(2,'0')}</span><h3>${esc(g.title)}</h3><span class="meta">${esc(g.tag)} · ${esc(g.time)}</span></div></a>`;
+
+function home(){
+  app.innerHTML=`
+  <section class="hero" id="top"><div class="frame"><img src="img/hero.jpg" alt="Людина на червоному стільці дивиться, як метеорит падає на Землю"></div>
+    <div class="over"><div class="wrap"><h1>AI STUDIO <span>SYMBIOS</span></h1><a class="btn" href="https://instagram.com/aisymbios" target="_blank" rel="noopener">Instagram ↗</a></div></div></section>
+  <div class="wrap">
+    <div class="shead"><h2>Гайди</h2><span class="lbl">${GUIDES.length} розбори</span></div>
+    <div class="grid">${GUIDES.map(tile).join('')}</div>
+  </div>
+  <section class="band"><div class="wrap">
+    <img src="img/portrait.jpg" alt="Автор SYMBIOS" loading="lazy">
+    <div class="txt"><p>Кінематографічні AI-ролики</p><a class="btn" href="https://instagram.com/aisymbios" target="_blank" rel="noopener">Instagram ↗</a></div>
+  </div></section>`;
+}
+function guide(g){
+  app.innerHTML=`
+  <section class="gcover"><div class="frame"><img src="${g.img}" alt="" style="object-position:${g.pos}"></div></section>
+  <div class="wrap">
+    <div class="ghead"><a href="#top">← Гайди</a><h1>${esc(g.title)}</h1></div>
+    <ol class="rows">${g.rows.map((r,i)=>`<li class="row"><div><h3>${esc(r.h)}</h3>${r.p?`<p>${esc(r.p)}</p>`:''}${r.prompt?`<div class="prompt"><button class="copy" id="cp${i}" data-i="${i}">Копіювати</button><pre>${esc(r.prompt).replace(/@img\d/g,m=>`<span class="t">${m}</span>`)}</pre></div>`:''}</div></li>`).join('')}</ol>
+    <div class="shead"><h2>Ще гайди</h2></div>
+    <div class="grid">${GUIDES.filter(o=>o!==g).slice(0,2).map(o=>tile(o,GUIDES.indexOf(o))).join('')}</div>
+  </div>`;
+  app.querySelectorAll('.copy').forEach(b=>b.onclick=()=>{
+    const t=g.rows[b.dataset.i].prompt,pre=b.nextElementSibling;
+    const ok=()=>{b.textContent='Готово';b.classList.add('ok');setTimeout(()=>{b.textContent='Копіювати';b.classList.remove('ok')},1500)};
+    const sel=()=>{const r=document.createRange();r.selectNodeContents(pre);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Ctrl+C'};
+    try{navigator.clipboard.writeText(t).then(ok,sel)}catch(e){sel()}
+  });
+  scrollTo(0,0);
+}
+function route(){const g=GUIDES.find(x=>x.slug===location.hash.slice(1));g?guide(g):home()}
+addEventListener('hashchange',route);route();
+</script>
+
+</body>
+</html>
