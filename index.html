@@ -129,29 +129,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 <script>
 /* ГАЙДИ — щоб додати новий, скопіюй об'єкт і зміни поля. img: файл обкладинки, pos: фокус кадру */
 const GUIDES=[
-{slug:"kadr",img:"img/meteor.jpg",pos:"50% 40%",tag:"Кадр",time:"3 хв",title:"Кадр, як із фільму",
- rows:[
-  {h:"Людина + подія",p:"Масштаб читається, коли поруч із подією є людина. Метеорит — це шпалери, метеорит і глядач на стільці — це вже кіно."},
-  {h:"Оптика, а не прикметники",prompt:"Shot on ARRI Alexa, 40mm anamorphic lens, low angle, warm rim light from the fireball, deep blue shadows, subject in the right third of the frame."},
-  {h:"Один теплий, один холодний",p:"Помаранчеве джерело світла проти синьої тіні. Більше кольорів — і кадр стає дешевим."}
- ]},
-{slug:"geroy",img:"img/portrait.jpg",pos:"50% 35%",tag:"Персонаж",time:"4 хв",title:"Один герой у всіх кадрах",
- rows:[
-  {h:"Лист персонажа з трьох панелей",p:"Сірий студійний фон. Тіло від шиї вниз без обличчя, портрет анфас, профіль."},
-  {h:"Промпт для листа",prompt:"Character sheet, three vertical panels on plain grey studio background: full body from the neck down with no face visible, front head-and-shoulders portrait, side profile. Same person, same outfit, even soft light."},
-  {h:"Посилання як @img1",p:"Лист персонажа — @img1, локація — @img2. У промпті відео тільки теги, без повторного опису обличчя."}
- ]},
-{slug:"scena",img:"img/chair.jpg",pos:"40% 50%",tag:"Seedance 2.0",time:"4 хв",title:"Сцена одним промптом",
- rows:[
-  {h:"Без SHOT 1 / SHOT 2",p:"Розбивка на шоти ламає обличчя героя між кадрами. Пиши сцену одним безперервним описом."},
-  {h:"Готовий промпт",prompt:"@img1 sits on a red metal chair on a concrete ledge, back to camera, holding a soda can. Beyond the ledge the Earth curves below, a burning meteor streaks across the sky. Slow dolly in from behind, his head turns slightly to follow the fireball, warm light flickers on his face."},
-  {h:"Український контекст",p:"Якщо дія в Україні, почни промпт із блоку з українськими вивісками, номерами й прапором. Інакше модель підмішує чуже."}
- ]},
-{slug:"tekst",img:"img/hero.jpg",pos:"30% 75%",tag:"Пост",time:"2 хв",title:"Текст поверх кадру",
- rows:[
-  {h:"Не проси модель писати",p:"Кирилицю й латиницю нейромережа малює з помилками."},
-  {h:"Накладай у CapCut",p:"Шрифт JetBrains Mono або IBM Plex Mono, дрібно, у нижній третині кадру. Як титр, а не як реклама."}
- ]}
 ];
 
 const app=document.getElementById('app');
@@ -163,8 +140,8 @@ function home(){
   <section class="hero" id="top"><div class="frame"><img src="img/hero.jpg" alt="Людина на червоному стільці дивиться, як метеорит падає на Землю"></div>
     <div class="over"><div class="wrap"><h1>AI STUDIO <span>SYMBIOS</span></h1><a class="btn" href="https://instagram.com/aisymbios" target="_blank" rel="noopener">Instagram ↗</a></div></div></section>
   <div class="wrap">
-    <div class="shead"><h2>Гайди</h2><span class="lbl">${GUIDES.length} розбори</span></div>
-    <div class="grid">${GUIDES.map(tile).join('')}</div>
+    <div class="shead"><h2>Гайди</h2><span class="lbl">${GUIDES.length?GUIDES.length+' · розбори':'Перший уже скоро'}</span></div>
+    ${GUIDES.length?`<div class="grid">${GUIDES.map(tile).join('')}</div>`:''}
   </div>
   <section class="band"><div class="wrap">
     <img src="img/portrait.jpg" alt="Автор SYMBIOS" loading="lazy">
@@ -177,8 +154,8 @@ function guide(g){
   <div class="wrap">
     <div class="ghead"><a href="#top">← Гайди</a><h1>${esc(g.title)}</h1></div>
     <ol class="rows">${g.rows.map((r,i)=>`<li class="row"><div><h3>${esc(r.h)}</h3>${r.p?`<p>${esc(r.p)}</p>`:''}${r.prompt?`<div class="prompt"><button class="copy" id="cp${i}" data-i="${i}">Копіювати</button><pre>${esc(r.prompt).replace(/@img\d/g,m=>`<span class="t">${m}</span>`)}</pre></div>`:''}</div></li>`).join('')}</ol>
-    <div class="shead"><h2>Ще гайди</h2></div>
-    <div class="grid">${GUIDES.filter(o=>o!==g).slice(0,2).map(o=>tile(o,GUIDES.indexOf(o))).join('')}</div>
+    ${GUIDES.length>1?`<div class="shead"><h2>Ще гайди</h2></div>
+    <div class="grid">${GUIDES.filter(o=>o!==g).slice(0,2).map(o=>tile(o,GUIDES.indexOf(o))).join('')}</div>`:''}
   </div>`;
   app.querySelectorAll('.copy').forEach(b=>b.onclick=()=>{
     const t=g.rows[b.dataset.i].prompt,pre=b.nextElementSibling;
