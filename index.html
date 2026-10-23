@@ -139,6 +139,40 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 <script>
 /* GUIDES — to add one, copy an object and edit the fields. img: cover file, pos: focal point. Refs are always @image1, @image2… */
 const GUIDES=[
+{slug:"demon-rider",video:"vid/demon-bike.mp4",img:"img/demon-poster.jpg",pos:"50% 40%",tag:"Seedance 2.5",time:"5 min",title:"Demon rider",
+ rows:[
+  {h:"Create the character sheet",p:"Three panels, one design: body, front, profile.",prompt:`Character reference sheet, three vertical panels side by side on a plain light grey studio background, no text, no labels, no logos. The same character in all three panels: an original horned demon samurai warrior in futuristic armor. A massive muscular build, slate-blue segmented armor plates with a stone-like scratched texture and thin bronze-gold trim lines on the chest, shoulders, forearms, thighs and shins, a round bronze emblem in the center of the chest, a long armored tasset hanging in front of the hips. Exposed upper arms of dark maroon-purple skin with veins and tribal-like texture. The head: a dark maroon organic helmet-face with two huge curved crescent horns sweeping upward, sculpted ridges, glowing magenta eyes and a slate-blue armored mouth guard, dark segmented collar plates around the neck. A katana with a black wrapped hilt and a bronze guard worn across the back.
+Panel 1: full body, front view, from the neck down to the boots, standing straight with arms at his sides, head cropped by the top of the frame. Panel 2: head and shoulders, front view, the glowing magenta eyes staring straight ahead, the katana hilt visible over the shoulder. Panel 3: side profile from the head to the chest, showing the horns, the mouth guard and the katana on the back.
+Soft even studio lighting, photorealistic, sharp detail of armor scratches and skin texture, consistent design across all three panels, not cartoon, not toy-like.`,img:"img/demon-sheet.jpg",alt:"Character sheet of the horned demon samurai"},
+  {h:"Create the motorcycle",p:"One clean side profile, no rider.",prompt:`Vehicle reference image, one single frame, full side profile of an original custom motorcycle on a plain light grey seamless studio background, no rider, no text, no logos, no license plate. A long, low, aggressive armored hyper-bike in matte charcoal black: a heavily scratched and dented riveted fairing that wraps the whole front and tank like battle armor, a sharp angular nose, a raised armored rear cowl. A massive exposed engine with thick coiled exhaust headers running along the side and two short exhausts under the seat. A long single-sided swingarm, fat wide black tires, black multi-spoke wheels with large brake discs. A worn, battle-used look with scratches, chipped paint and dust. Soft even studio lighting with a soft contact shadow, photorealistic product-shot detail.`,img:"img/demon-bike.jpg",alt:"Side profile of the armored black motorcycle"},
+  {h:"Create the location",p:"An empty desert, vertical 9:16.",prompt:`Location reference image, one single vertical frame, no people, no vehicles. A vast flat orange desert under a hazy pale beige sky. Soft, fine orange sand in the foreground with light wind ripples, faint footprints and small tracks, scattered low sand mounds in the middle distance, a long smooth dune ridge on the horizon. Diffused warm daylight through a light sand haze, low contrast, natural muted colors. Shot on ARRI Alexa Mini LF, 35mm lens, shallow depth of field with a soft-focus background, subtle 35mm film grain, photorealistic. Vertical 9:16.`,img:"img/demon-desert.jpg",narrow:true,alt:"Empty orange desert"},
+  {h:"Generate the video",p:"Seedance 2.5 · 16 s · 9:16 · 720p. Upload the character as @image1, the motorcycle as @image2, the location as @image3.",link:{href:"https://higgsfield.ai?fpr=vladyslav-88084e",label:"Open Higgsfield ↗"},prompt:`REFERENCES
+@image1 = the horned demon warrior — use his body, slate-blue segmented armor with bronze trim, maroon skin, crescent horns, glowing magenta eyes and the katana on his back only; ignore the grey studio background and the three-panel layout.
+@image2 = the armored motorcycle — use its long low matte-black body, scratched riveted fairings, coiled exhaust headers and fat black tires only; ignore the studio background, the barcode and all decals.
+@image3 = the desert location — use the orange sand, small sand mounds, hazy beige sky and soft haze only; do not copy the framing.
+
+STYLE
+Photoreal live-action, shot on ARRI Alexa Mini LF, 35mm lens, natural diffused desert daylight, warm orange-and-beige grade with slightly desaturated shadows, airborne sand haze, 35mm film grain, no CGI gloss. Vertical 9:16 framing. Maintain this look, @image1's appearance and @image2's design across every beat.
+
+TIMELINE
+[0:00–0:03] WIDE, LOW ANGLE — the flat sand of @image3 erupts upward in a violent explosion and @image1 bursts out of the ground, launching high into the air toward the camera with thick plumes of orange sand spraying around him; locked-off static shot from the desert floor; hazy backlight through the sand cloud.
+HARD CUT TO
+[0:03–0:06] MEDIUM WIDE — @image1 lands heavily in a crouch with one fist on the ground, a ring of sand blasting outward, then rises to full height as his magenta eyes flare brighter; slow push in; soft overcast daylight.
+HARD CUT TO
+[0:06–0:10] OVER-THE-SHOULDER — from behind @image1, his armored shoulder and katana hilt in the foreground, he raises one hand toward scattered matte-black parts half-buried in the sand; the parts lift, fly together and lock into place, assembling into @image2 with sand pouring off every panel; locked-off static shot; dust glowing in the haze.
+HARD CUT TO
+[0:10–0:13] MEDIUM — @image1 swings one leg over @image2 in a single confident motion, sits, leans forward and grips the handlebars as the engine ignites with a puff of sand from the exhaust; tracking shot right; low warm side light.
+HARD CUT TO
+[0:13–0:16] WIDE, REAR VIEW, GROUND LEVEL — @image2 with @image1 riding accelerates violently, the rear tire throwing a rooster tail of orange sand toward the camera, then tears away across the flat desert and shrinks toward the dunes, leaving deep tracks and a long dust trail; locked-off static shot; hazy beige horizon.
+
+AUDIO
+(Score) low sub-bass pulse from 0:00, building tension; one heavy percussive hit on each cut.
+(SFX) 0:00 deep ground explosion and rushing sand; 0:03 heavy armored landing impact and sand blast; 0:06–0:10 metallic clanks and locking clicks as parts snap together, sand pouring; 0:11 engine ignition roar; 0:13–0:16 aggressive engine scream fading into wind; desert wind throughout.
+No dialogue, no VO.
+
+CONSTRAINTS
+No text overlays, no subtitles, no watermark, no logos, no barcode, no decals, no slow motion, no extra characters, no duplicate characters, no extra limbs, no CGI gloss, no jump cuts inside a beat, no camera shake. Aspect ratio 9:16, 16 seconds.`}
+ ]},
 {slug:"superhero",video:"vid/superhero.mp4",img:"img/superhero-poster.jpg",pos:"50% 45%",tag:"Higgsfield Genjutsu",time:"3 min",title:"Become a superhero",
  rows:[
   {h:"Create a character sheet",p:"Upload your photo as @image1, the emblem as @image2, and paste the prompt.",
